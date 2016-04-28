@@ -1,0 +1,8 @@
+applications:
+- name: baby-got-feedback
+  stack: cflinuxfs2
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git
+  path: build/libs/help-feedback-0.1.0.jar
+  instances: 1
+  memory: 1024M
+  disk_quota: 1024M

@@ -14,17 +14,16 @@ public class Feedback {
 	private String title;
 
 	@Column(name="positiveCount")
-	private Integer positiveCount;
+	private Integer positiveCount = 0;
 
 	@Column(name="negativeCount")
-	private Integer negativeCount;
+	private Integer negativeCount = 0;
 
 	protected Feedback() {}
 
-	public Feedback(long id, String title, Boolean isHelpful){
-		this.id = id;
+	public Feedback(String title, Boolean isHelpful){
 		this.title = title;
-		if (isHelpful){
+		if (isHelpful) {
 			positiveCount = 1;
 		} else {
 			negativeCount = 1;
@@ -64,5 +63,14 @@ public class Feedback {
 
 	public void addNegativeFeedback(){
 		negativeCount++;
+	}
+
+	public void addFeedback(Boolean isHelpful){
+		if (isHelpful){
+			this.addPositiveFeedback();
+		}
+		else {
+			this.addNegativeFeedback();
+		}
 	}
 }
