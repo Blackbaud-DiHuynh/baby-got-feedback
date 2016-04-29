@@ -19,6 +19,10 @@ public class Feedback {
 	@Column(name="negativeCount")
 	private Integer negativeCount = 0;
 
+
+	@Column(name="comments")
+	private String comments = "";
+
 	protected Feedback() {}
 
 	public Feedback(String title, Boolean isHelpful){
@@ -46,6 +50,10 @@ public class Feedback {
 		return negativeCount;
 	}
 
+	public String getComments() { return comments; }
+
+	public void setComments(String comments) { this.comments = comments; }
+
 	public void setPositiveCount(Integer count) {
 		this.positiveCount = count;
 	}
@@ -72,5 +80,9 @@ public class Feedback {
 		else {
 			this.addNegativeFeedback();
 		}
+	}
+
+	public void addComments(String comments){
+		this.comments += "\n" + comments;
 	}
 }

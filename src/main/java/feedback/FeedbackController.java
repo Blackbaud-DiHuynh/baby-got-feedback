@@ -20,16 +20,19 @@ public class FeedbackController {
 	private FeedbackRepo feedbackRepository;
 
 	@RequestMapping(path = "/feedback", method = RequestMethod.POST)
-	public Feedback createFeedback(@RequestParam(value="title") String title, @RequestParam(value="isHelpful") Boolean isHelpful) {
-		Feedback existingFeedback = feedbackRepository.findByTitle(title);
+	public Feedback createFeedback(@RequestParam(value="title") String title, @RequestParam(value="isHelpful") Boolean isHelpful,
+	                               @RequestParam(value="comments") String comments) {
+		Feedback existingFeedback = feedbackRepository.findByTitle(title.toLowerCase());
 
 		if (existingFeedback != null){
 			existingFeedback.addFeedback(isHelpful);
+			existingFeedback.addComments(comments);
 			feedbackRepository.save(existingFeedback);
 			return existingFeedback;
 		}
 		else {
 			Feedback newFeedback = new Feedback(title, isHelpful);
+			newFeedback.setComments(comments);
 			feedbackRepository.save(newFeedback);
 			return newFeedback;
 		}
